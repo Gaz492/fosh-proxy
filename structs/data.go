@@ -30,24 +30,57 @@ type (
 		Yearlyrainin   string `form:"yearlyrainin" binding:"required"`
 	}
 
-	WeatherParamsStruct struct {
-		Action         string `url:"action"`
-		Baromin        string `url:"baromin"`
-		Dailyrainin    string `url:"dailyrainin"`
-		Dateutc        string `url:"dateutc"`
-		Dewptf         string `url:"dewptf"`
-		Humidity       string `url:"humidity"`
-		ID             string `url:"ID"`
-		Indoorhumidity string `url:"indoorhumidity"`
-		Indoortempf    string `url:"indoortempf"`
-		Password       string `url:"PASSWORD"`
-		Rainin         string `url:"rainin"`
-		Softwaretype   string `url:"softwaretype"`
-		Solarradiation string `url:"solarradiation"`
-		Tempf          string `url:"tempf"`
-		UV             string `url:"UV"`
-		Winddir        string `url:"winddir"`
-		Windgustmph    string `url:"windgustmph"`
-		Windspeedmph   string `url:"windspeedmphurl"`
+	WUParams struct {
+		Action         string `url:"action, omitempty"`
+		Baromin        string `url:"baromin, omitempty"`
+		Dailyrainin    string `url:"dailyrainin, omitempty"`
+		Dateutc        string `url:"dateutc, omitempty"`
+		Dewptf         string `url:"dewptf, omitempty"`
+		Humidity       string `url:"humidity, omitempty"`
+		ID             string `url:"ID, omitempty"`
+		Indoorhumidity string `url:"indoorhumidity, omitempty"`
+		Indoortempf    string `url:"indoortempf, omitempty"`
+		Password       string `url:"PASSWORD, omitempty"`
+		Rainin         string `url:"rainin, omitempty"`
+		Softwaretype   string `url:"softwaretype, omitempty"`
+		Solarradiation string `url:"solarradiation, omitempty"`
+		Tempf          string `url:"tempf, omitempty"`
+		UV             string `url:"UV, omitempty"`
+		Winddir        string `url:"winddir, omitempty"`
+		Windgustmph    string `url:"windgustmph, omitempty"`
+		Windspeedmph   string `url:"windspeedmph, omitempty"`
+	}
+	WOWParams struct {
+		Action         string `url:"action, omitempty"`
+		Baromin        string `url:"baromin, omitempty"`
+		Dailyrainin    string `url:"dailyrainin, omitempty"`
+		Dateutc        string `url:"dateutc, omitempty"`
+		Dewptf         string `url:"dewptf, omitempty"`
+		Humidity       string `url:"humidity, omitempty"`
+		ID             string `url:"ID, omitempty"`
+		Indoorhumidity string `url:"indoorhumidity, omitempty"`
+		Indoortempf    string `url:"indoortempf, omitempty"`
+		Password       string `url:"PASSWORD, omitempty"`
+		Rainin         string `url:"rainin, omitempty"`
+		Softwaretype   string `url:"softwaretype, omitempty"`
+		Solarradiation string `url:"solarradiation, omitempty"`
+		Tempf          string `url:"tempf, omitempty"`
+		UV             string `url:"UV, omitempty"`
+		Winddir        string `url:"winddir, omitempty"`
+		Windgustmph    string `url:"windgustmph, omitempty"`
+		Windspeedmph   string `url:"windspeedmph, omitempty"`
+	}
+	WindyParams struct {
+		Baromin      string `url:"baromin, omitempty"`
+		Dateutc      string `url:"dateutc, omitempty"`
+		Dewpoint     string `url:"dewpoint, omitempty"`
+		Humidity     string `url:"humidity, omitempty"`
+		StationID    string `url:"station, omitempty"`
+		Rainin       string `url:"rainin, omitempty"`
+		Tempf        string `url:"tempf, omitempty"`
+		UV           string `url:"uv, omitempty"`
+		Winddir      string `url:"winddir, omitempty"`
+		Windgustmph  string `url:"windgustmph, omitempty"`
+		Windspeedmph string `url:"windspeedmph, omitempty"`
 	}
 )

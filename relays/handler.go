@@ -49,7 +49,7 @@ func RelayHandler(data structs.EcowittData) error {
 }
 
 func wuFormat(data structs.EcowittData, relay config.Relays) error {
-	params := structs.WeatherParamsStruct{Action: data.Action, Baromin: data.Baromin, Dailyrainin: data.Dailyrainin, Dateutc: data.Dateutc, Dewptf: data.Dewptf, Humidity: data.Humidity, ID: relay.StationID, Indoorhumidity: data.Indoorhumidity, Indoortempf: data.Indoortempf, Password: relay.StationKey, Rainin: data.Rainin, Softwaretype: data.Softwaretype, Solarradiation: data.Solarradiation, Tempf: data.Tempf, UV: data.UV, Winddir: data.Winddir, Windgustmph: data.Windgustmph, Windspeedmph: data.Windspeedmph}
+	params := structs.WUParams{Action: data.Action, Baromin: data.Baromin, Dailyrainin: data.Dailyrainin, Dateutc: data.Dateutc, Dewptf: data.Dewptf, Humidity: data.Humidity, ID: relay.StationID, Indoorhumidity: data.Indoorhumidity, Indoortempf: data.Indoortempf, Password: relay.StationKey, Rainin: data.Rainin, Softwaretype: data.Softwaretype, Solarradiation: data.Solarradiation, Tempf: data.Tempf, UV: data.UV, Winddir: data.Winddir, Windgustmph: data.Windgustmph, Windspeedmph: data.Windspeedmph}
 
 	v, _ := query.Values(params)
 	queryString := v.Encode()
@@ -73,5 +73,21 @@ func wowFormat(data structs.EcowittData, relay config.Relays) error {
 }
 
 func windyFormat(data structs.EcowittData, relay config.Relays) error {
+	params := structs.WindyParams{Baromin: data.Baromin, Dateutc: data.Dateutc, Dewpoint: utils.FarenheitToCelsius(data.Dewptf), Humidity: data.Humidity, StationID: relay.StationID, Rainin: data.Rainin, Tempf: data.Tempf, UV: data.UV, Winddir: data.Winddir, Windgustmph: data.Windgustmph, Windspeedmph: data.Windspeedmph}
+
+	v, _ := query.Values(params)
+	queryString := v.Encode()
+
+	request, err := utils.HandleGetRequest(fmt.Sprintf("%s/%s?%s", relay.Host, relay.StationKey, queryString), map[string][]string{})
+	if err != nil {
+		pterm.Error.Println("Error sending windy request\n", err)
+		return err
+	}
+
+	body, err := io.ReadAll(request.Body)
+	if err != nil {
+		pterm.Error.Println("Error reading request body\n", err)
+	}
+	pterm.Debug.Println(string(body))
 	return nil
 }
