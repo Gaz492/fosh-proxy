@@ -73,7 +73,7 @@ func wowFormat(data structs.EcowittData, relay config.Relays) error {
 }
 
 func windyFormat(data structs.EcowittData, relay config.Relays) error {
-	params := structs.WindyParams{Baromin: data.Baromin, Dateutc: data.Dateutc, Dewpoint: utils.FarenheitToCelsius(data.Dewptf), Humidity: data.Humidity, StationID: relay.StationID, Rainin: data.Rainin, Tempf: data.Tempf, UV: data.UV, Winddir: data.Winddir, Windgustmph: data.Windgustmph, Windspeedmph: data.Windspeedmph}
+	params := structs.WindyParams{Baromin: data.Baromin, Dewpoint: utils.FarenheitToCelsius(data.Dewptf), Humidity: data.Humidity, StationID: relay.StationID, Rainin: data.Rainin, Tempf: data.Tempf, UV: data.UV, Winddir: data.Winddir, Windgustmph: data.Windgustmph, Windspeedmph: data.Windspeedmph}
 
 	v, _ := query.Values(params)
 	queryString := v.Encode()

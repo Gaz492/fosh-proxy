@@ -71,8 +71,8 @@ type (
 		Windspeedmph   string `url:"windspeedmph, omitempty"`
 	}
 	WindyParams struct {
-		Baromin      string `url:"baromin, omitempty"`
-		Dateutc      string `url:"dateutc, omitempty"`
+		Baromin string `url:"baromin, omitempty"`
+		//Dateutc      string `url:"dateutc, omitempty"` #TODO While not needed should probably send this
 		Dewpoint     string `url:"dewpoint, omitempty"`
 		Humidity     string `url:"humidity, omitempty"`
 		StationID    string `url:"station, omitempty"`
