@@ -11,6 +11,5 @@ FROM alpine:3
 WORKDIR /go/src/app
 COPY --from=build /FOSH-Proxy ./FOSH-Proxy
 EXPOSE 8080
-VOLUME ['/go/src/app/config.yml']
 
 ENTRYPOINT  ["./FOSH-Proxy"]
