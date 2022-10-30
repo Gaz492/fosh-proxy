@@ -23,6 +23,9 @@ func init() {
 	if *debug {
 		pterm.EnableDebugMessages()
 		pterm.Debug.Println("Debug logging enabled")
+		gin.SetMode(gin.DebugMode)
+	} else {
+		gin.SetMode(gin.ReleaseMode)
 	}
 
 	pterm.Info.Println("Initializing config")
