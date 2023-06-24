@@ -31,10 +31,10 @@ func Initialization() {
 
 func SaveToDB(wData structs.EcowittData) error {
 	insertData := `INSERT INTO sensor_data (
-absbaromin, baromin, dailyrainin, dateutc, dewptf, humidity, sensor_id, indoorhumidity, indoortempf, lowbatt, monthlyrainin, rainin, realtime, rtfreq, softwaretype, solarradiation, tempf, UV, weeklyrainin, windchillf, winddir, windgustmph, windspeedmph, yearlyrainin) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24);`
+absbaromin, baromin, dailyrainin, dewptf, humidity, sensor_id, indoorhumidity, indoortempf, lowbatt, monthlyrainin, rainin, realtime, rtfreq, softwaretype, solarradiation, tempf, UV, weeklyrainin, windchillf, winddir, windgustmph, windspeedmph, yearlyrainin) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23);`
 
 	//Execute INSERT command
-	_, err := Conn.Exec(ConnCtx, insertData, wData.Absbaromin, wData.Baromin, wData.Dailyrainin, wData.Dateutc, wData.Dewptf, wData.Humidity, wData.ID, wData.Indoorhumidity, wData.Indoortempf, wData.Lowbatt, wData.Monthlyrainin, wData.Rainin, wData.Realtime, wData.Rtfreq, wData.Softwaretype, wData.Solarradiation, wData.Tempf, wData.UV, wData.Weeklyrainin, wData.Windchillf, wData.Winddir, wData.Windgustmph, wData.Windspeedmph, wData.Yearlyrainin)
+	_, err := Conn.Exec(ConnCtx, insertData, wData.Absbaromin, wData.Baromin, wData.Dailyrainin, wData.Dewptf, wData.Humidity, wData.ID, wData.Indoorhumidity, wData.Indoortempf, wData.Lowbatt, wData.Monthlyrainin, wData.Rainin, wData.Realtime, wData.Rtfreq, wData.Softwaretype, wData.Solarradiation, wData.Tempf, wData.UV, wData.Weeklyrainin, wData.Windchillf, wData.Winddir, wData.Windgustmph, wData.Windspeedmph, wData.Yearlyrainin)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Unable to insert data into database: %v\n", err)
 		return errors.New(fmt.Sprintf("Unable to insert data into database: %v\n", err))
