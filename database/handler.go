@@ -7,6 +7,7 @@ import (
 	"fosh-proxy/config"
 	"fosh-proxy/structs"
 	"github.com/jackc/pgx/v5/pgxpool"
+	"github.com/pterm/pterm"
 	"os"
 )
 
@@ -30,6 +31,7 @@ func Initialization() {
 		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
 		os.Exit(1)
 	}
+	pterm.Success.Println("Connected to DB")
 }
 
 func SaveToDB(wData structs.EcowittData) error {
