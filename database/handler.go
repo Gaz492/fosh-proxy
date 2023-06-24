@@ -18,13 +18,8 @@ var (
 
 func Initialization() {
 	ConnCtx = context.Background()
-	connStr := fmt.Sprintf("postgres://%s:%s@%s:%s/%s",
-		config.Cfg.Database.User,
-		config.Cfg.Database.Password,
-		config.Cfg.Database.Host,
-		config.Cfg.Database.Port,
-		config.Cfg.Database.Database,
-	)
+	connStr := fmt.Sprintf("postgres://%s:%s@%s:%s/%s", config.Cfg.Database.User, config.Cfg.Database.Password, config.Cfg.Database.Host, config.Cfg.Database.Port, config.Cfg.Database.Database)
+	pterm.Info.Println("Con str:", connStr)
 	var err error
 	Conn, err = pgxpool.New(ConnCtx, connStr)
 	if err != nil {
