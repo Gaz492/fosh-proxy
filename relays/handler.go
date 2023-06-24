@@ -49,7 +49,34 @@ func RelayHandler(data structs.EcowittData) error {
 }
 
 func wuFormat(data structs.EcowittData, relay config.Relays) error {
-	params := structs.WUParams{Action: data.Action, Baromin: data.Baromin, Dailyrainin: data.Dailyrainin, Dateutc: data.Dateutc, Dewptf: data.Dewptf, Humidity: data.Humidity, ID: relay.StationID, Indoorhumidity: data.Indoorhumidity, Indoortempf: data.Indoortempf, Password: relay.StationKey, Rainin: data.Rainin, Softwaretype: data.Softwaretype, Solarradiation: data.Solarradiation, Tempf: data.Tempf, UV: data.UV, Winddir: data.Winddir, Windgustmph: data.Windgustmph, Windspeedmph: data.Windspeedmph}
+	params := structs.WUParams{
+		Absbaromin:     data.Absbaromin,
+		Action:         data.Action,
+		Baromin:        data.Baromin,
+		Dailyrainin:    data.Dailyrainin,
+		Dateutc:        data.Dateutc,
+		Dewptf:         data.Dewptf,
+		Humidity:       data.Humidity,
+		ID:             data.ID,
+		Indoorhumidity: data.Indoorhumidity,
+		Indoortempf:    data.Indoortempf,
+		Lowbatt:        data.Lowbatt,
+		Monthlyrainin:  data.Monthlyrainin,
+		Password:       data.Password,
+		Rainin:         data.Rainin,
+		Realtime:       data.Realtime,
+		Rtfreq:         data.Rtfreq,
+		Softwaretype:   data.Softwaretype,
+		Solarradiation: data.Solarradiation,
+		Tempf:          data.Tempf,
+		UV:             data.UV,
+		Weeklyrainin:   data.Weeklyrainin,
+		Windchillf:     data.Windchillf,
+		Winddir:        data.Winddir,
+		Windgustmph:    data.Windgustmph,
+		Windspeedmph:   data.Windspeedmph,
+		Yearlyrainin:   data.Yearlyrainin,
+	}
 
 	v, _ := query.Values(params)
 	queryString := v.Encode()

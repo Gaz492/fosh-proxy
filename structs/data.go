@@ -31,6 +31,7 @@ type (
 	}
 
 	WUParams struct {
+		Absbaromin     string `url:"absbaromin, omitempty"`
 		Action         string `url:"action, omitempty"`
 		Baromin        string `url:"baromin, omitempty"`
 		Dailyrainin    string `url:"dailyrainin, omitempty"`
@@ -40,15 +41,22 @@ type (
 		ID             string `url:"ID, omitempty"`
 		Indoorhumidity string `url:"indoorhumidity, omitempty"`
 		Indoortempf    string `url:"indoortempf, omitempty"`
+		Lowbatt        string `url:"lowbatt, omitempty"`
+		Monthlyrainin  string `url:"monthlyrainin, omitempty"`
 		Password       string `url:"PASSWORD, omitempty"`
 		Rainin         string `url:"rainin, omitempty"`
+		Realtime       string `url:"realtime, omitempty"`
+		Rtfreq         string `url:"rtfreq, omitempty"`
 		Softwaretype   string `url:"softwaretype, omitempty"`
 		Solarradiation string `url:"solarradiation, omitempty"`
 		Tempf          string `url:"tempf, omitempty"`
 		UV             string `url:"UV, omitempty"`
+		Weeklyrainin   string `url:"weeklyrainin, omitempty"`
+		Windchillf     string `url:"windchillf, omitempty"`
 		Winddir        string `url:"winddir, omitempty"`
 		Windgustmph    string `url:"windgustmph, omitempty"`
 		Windspeedmph   string `url:"windspeedmph, omitempty"`
+		Yearlyrainin   string `url:"yearlyrainin, omitempty"`
 	}
 	WOWParams struct {
 		Action         string `url:"action, omitempty"`

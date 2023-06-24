@@ -38,6 +38,7 @@ func init() {
 }
 
 func main() {
+	defer database.Conn.Close(database.ConnCtx)
 	r := gin.Default()
 
 	v1 := r.Group("/v1")
