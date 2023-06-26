@@ -9,11 +9,17 @@ import (
 	"github.com/google/go-querystring/query"
 	"github.com/pterm/pterm"
 	"io"
+	"time"
+)
+
+var (
+	relayLastSent map[string]time.Time
 )
 
 func RelayHandler(data structs.EcowittData) error {
 	for _, relay := range config.Cfg.Relays {
-		if relay.Enabled {
+		lastSent := time.Now().Sub(relayLastSent[relay.Host]).Seconds()
+		if relay.Enabled && (int64(lastSent) >= relay.SendFrequency) {
 			pterm.Debug.Println(fmt.Sprintf("Sending data to %s", relay.Host))
 			switch relay.Format {
 			case "wunderground":
@@ -41,6 +47,7 @@ func RelayHandler(data structs.EcowittData) error {
 				pterm.Error.Println("Unknown data format, must be 'wunderground', 'wow' or 'windy', not relaying data")
 				return errors.New("unknown data format, must be 'wunderground', 'wow' or 'windy', not relaying data")
 			}
+			relayLastSent[relay.Host] = time.Now()
 		} else {
 			pterm.Debug.Println(fmt.Sprintf("%s is disabled, skipping", relay.Host))
 		}

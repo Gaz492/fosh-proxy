@@ -17,10 +17,11 @@ type (
 		Database string `yaml:"database"`
 	}
 	Relays struct {
-		Enabled    bool   `yaml:"enabled"`
-		Host       string `yaml:"host"`
-		Format     string `yaml:"format"`
-		StationID  string `yaml:"stationID"`
-		StationKey string `yaml:"stationKey"`
+		Enabled       bool   `yaml:"enabled"`
+		Host          string `yaml:"host"`
+		Format        string `yaml:"format"`
+		StationID     string `yaml:"stationID"`
+		StationKey    string `yaml:"stationKey"`
+		SendFrequency int64  `yaml:"sendFrequency"`
 	}
 )

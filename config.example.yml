@@ -1,12 +1,13 @@
 ---
 # Save submitted data to database
 saveToDatabase: false
-# Set database type to use (mysql/postgresql/influx1/influx2)
-databaseType: mysql
+# Set database type to use (postgresql/timescaledb)
+databaseType: timescaledb
 database:
   host: localhost
-  user: root
-  password: changeme
+  port: 5432
+  user: postgres
+  password: CHANGEME
   database: weather
 # Password/key/secret to secure submission endpoint
 stationKey: aSecretKey
@@ -18,13 +19,17 @@ relays:
     format: wunderground # Format the data needs to be sent as (wunderground/wow/windy)
     stationID: station1 # ID used to send the data
     stationKey: blahblah # Key used to send the data (This is your API key)
+    sendFrequency: 300 # Seconds between sending data to endpoint
   - enabled: true # Enable relay
     host: http://wow.metoffice.gov.uk/automaticreading
     format: wow
     stationID: station1
     stationKey: blahblah
+    sendFrequency: 300
   - enabled: true
     host: https://stations.windy.com/pws/update
     format: windy
     stationID: station1
     stationKey: blahblah
+    sendFrequency: 300
+
