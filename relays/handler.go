@@ -13,7 +13,7 @@ import (
 )
 
 var (
-	relayLastSent map[string]time.Time
+	relayLastSent = make(map[string]time.Time)
 )
 
 func RelayHandler(data structs.EcowittData) error {
