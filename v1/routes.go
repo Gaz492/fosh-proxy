@@ -5,42 +5,48 @@ import (
 	"fosh-proxy/database"
 	"fosh-proxy/relays"
 	"fosh-proxy/structs"
-	"github.com/gin-gonic/gin"
+	"github.com/gofiber/fiber/v3"
 	"github.com/pterm/pterm"
 	"net/http"
 )
 
-func Submit(c *gin.Context) {
+type (
+	ErrorResponse struct {
+		Ok    bool   `json:"ok"`
+		Error string `json:"error"`
+	}
+)
+
+func Submit(c fiber.Ctx) error {
 	var data structs.EcowittData
-	err := c.ShouldBindQuery(&data)
+	err := c.Bind().Query(&data)
 	if err != nil {
 		pterm.Error.Println("Error binding query parameters\n", err)
-		errResponse(c, err, http.StatusBadRequest)
-		c.Abort()
-		return
+		err = errResponse(c, err, http.StatusBadRequest)
+		return err
 	}
 
 	if config.Cfg.SaveToDatabase {
-		err := database.SaveToDB(data)
+		err := database.InsertData(data)
 		if err != nil {
-			errResponse(c, err, http.StatusInternalServerError)
-			c.Abort()
-			return
+			err = errResponse(c, err, http.StatusInternalServerError)
+			return err
 		}
 	}
 	if config.Cfg.EnableRelay {
 		err := relays.RelayHandler(data)
 		if err != nil {
-			errResponse(c, err, http.StatusInternalServerError)
-			c.Abort()
-			return
+			err = errResponse(c, err, http.StatusInternalServerError)
+			return err
 		}
 	}
+	return nil
 }
 
-func errResponse(c *gin.Context, err error, code int) {
-	c.IndentedJSON(code, gin.H{
-		"ok":    false,
-		"error": err.Error(),
+func errResponse(c fiber.Ctx, err error, code int) error {
+	c.Status(code)
+	return c.JSON(ErrorResponse{
+		Ok:    false,
+		Error: err.Error(),
 	})
 }

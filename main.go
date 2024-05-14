@@ -3,9 +3,9 @@ package main
 import (
 	"flag"
 	"fosh-proxy/config"
-	"fosh-proxy/database"
 	v1Router "fosh-proxy/v1"
-	"github.com/gin-gonic/gin"
+	"github.com/gofiber/fiber/v3"
+	"github.com/gofiber/fiber/v3/middleware/logger"
 	"github.com/pterm/pterm"
 )
 
@@ -23,31 +23,30 @@ func init() {
 	if *debug {
 		pterm.EnableDebugMessages()
 		pterm.Debug.Println("Debug logging enabled")
-		gin.SetMode(gin.DebugMode)
+		//gin.SetMode(gin.DebugMode)
 	} else {
-		gin.SetMode(gin.ReleaseMode)
+		//gin.SetMode(gin.ReleaseMode)
 	}
 
 	pterm.Info.Println("Initializing config")
 	config.Initialize(configLocation)
 	pterm.Success.Println("Config initialized")
 
-	if config.Cfg.SaveToDatabase {
-		database.Initialization()
-	}
+	//if config.Cfg.SaveToDatabase {
+	//	database.Initialization()
+	//}
 }
 
 func main() {
-	defer database.Conn.Close()
-	r := gin.Default()
+	//defer database.Conn.Close()
+	app := fiber.New()
 
-	v1 := r.Group("/v1")
+	app.Use(logger.New())
+
+	v1 := app.Group("/v1")
 	{
-		v1.GET("/submit", v1Router.Submit)
+		v1.Get("/submit", v1Router.Submit)
 	}
 
-	err := r.Run()
-	if err != nil {
-		pterm.Error.Println("Error starting server", err)
-	}
+	pterm.Fatal.Println(app.Listen(":8080"))
 }
