@@ -1,4 +1,4 @@
-FROM golang:1.20-alpine as build
+FROM golang:1.22-alpine as build
 LABEL stage=Build
 ENV GITHUB_SHA=$GITHUB_SHA
 WORKDIR /go/src/app
