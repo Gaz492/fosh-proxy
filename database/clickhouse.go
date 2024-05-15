@@ -99,7 +99,7 @@ func connect() (driver.Conn, error) {
 				Username: config.Cfg.Database.User,
 				Password: "",
 			},
-			Debug: true,
+			Debug: false,
 			Debugf: func(format string, v ...interface{}) {
 				pterm.Warning.Printfln(format, v)
 			},
