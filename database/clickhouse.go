@@ -39,40 +39,13 @@ type row struct {
 	SoftwareType   string    `ch:"software_type"`
 }
 
-type row2 struct {
-	Timestamp       time.Time
-	Station_id      string
-	Sensor_id       string
-	Abs_baro_min    string
-	Baro_min        string
-	Temp_f          string
-	Dewpoint_f      string
-	Humidity        string
-	Indoor_temp_f   string
-	Indoor_humidity string
-	Solar_radiation string
-	Uv              string
-	Wind_chill_f    string
-	Wind_dir        string
-	Wind_speed_mph  string
-	Wind_gust_mph   string
-	Rain_in         string
-	Daily_rain_in   string
-	Weekly_rain_in  string
-	Monthly_rain_in string
-	Yearly_rain_in  string
-	Low_battery     string
-	Real_time       string
-	Rt_freq         string
-	Software_type   string
-}
-
 func InsertData(wData structs.EcowittData) error {
 	conn, err := connect()
 	if err != nil {
 		pterm.Error.Println("Error connecting to ClickHouse", err)
 		return err
 	}
+	defer conn.Close()
 	v, err := conn.ServerVersion()
 	pterm.Info.Println("ClickHouse version:", v)
 
