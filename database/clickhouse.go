@@ -46,8 +46,8 @@ func InsertData(wData structs.EcowittData) error {
 		return err
 	}
 	defer conn.Close()
-	v, err := conn.ServerVersion()
-	pterm.Info.Println("ClickHouse version:", v)
+	//v, err := conn.ServerVersion()
+	//pterm.Info.Println("ClickHouse version:", v)
 
 	batch, err := conn.PrepareBatch(context.Background(), "INSERT INTO data")
 	if err != nil {
