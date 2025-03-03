@@ -23,9 +23,6 @@ func init() {
 	if *debug {
 		pterm.EnableDebugMessages()
 		pterm.Debug.Println("Debug logging enabled")
-		//gin.SetMode(gin.DebugMode)
-	} else {
-		//gin.SetMode(gin.ReleaseMode)
 	}
 
 	pterm.Info.Println("Initializing config")
@@ -40,13 +37,12 @@ func init() {
 func main() {
 	//defer database.Conn.Close()
 	app := fiber.New()
-
 	app.Use(logger.New())
 
 	v1 := app.Group("/v1")
 	{
 		v1.Get("/submit", v1Router.Submit)
 	}
-
+	pterm.Info.Println("Starting server")
 	pterm.Fatal.Println(app.Listen(":8080"))
 }

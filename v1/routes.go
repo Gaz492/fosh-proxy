@@ -1,6 +1,7 @@
 package v1
 
 import (
+	"fmt"
 	"fosh-proxy/config"
 	"fosh-proxy/database"
 	"fosh-proxy/relays"
@@ -23,6 +24,12 @@ func Submit(c fiber.Ctx) error {
 	if err != nil {
 		pterm.Error.Println("Error binding query parameters\n", err)
 		err = errResponse(c, err, http.StatusBadRequest)
+		return err
+	}
+
+	if data.Tempf < -30 {
+		pterm.Error.Printfln("Temperature too low: %f", data.Tempf)
+		err = errResponse(c, fmt.Errorf("temperature too low: %f", data.Tempf), http.StatusBadRequest)
 		return err
 	}
 
